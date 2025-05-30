@@ -89,7 +89,11 @@ class PriceTransformer:
                     # Store attention weights (simplified for demonstration)
                     def get_attention_hook(layer_idx):
                         def hook(module, input, output):
-                            attention_weights.append(output.detach())
+                            # Check if output is a tuple and extract the first element
+                            if isinstance(output, tuple):
+                                attention_weights.append(output[0].detach())
+                            else:
+                                attention_weights.append(output.detach())
                         return hook
                     
                     # Register hooks for attention weights
