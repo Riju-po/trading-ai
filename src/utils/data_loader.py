@@ -6,7 +6,8 @@ from datetime import datetime, timedelta
 import logging
 from typing import Optional, List, Dict, Any
 import dotenv
-import os
+# Remove this duplicate import
+# import os
 
 try:
     import ccxt
