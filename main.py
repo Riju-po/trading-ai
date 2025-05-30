@@ -10,12 +10,19 @@ from src.fusion.ensemble import SignalFusion
 from src.risk_management.risk_manager import RiskManager
 from src.tradingview.exporter import TradingViewExporter
 from src.utils.data_loader import OHLCVDataLoader
+import os
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+# At the beginning of main()
 def main():
     logger.info("Starting AI Signal Generator")
+    
+    # Check if we're running in simulation mode
+    simulation_mode = os.environ.get('USE_SIMULATION_MODE', 'false').lower() == 'true'
+    if simulation_mode:
+        logger.info("Running in simulation mode")
     
     # 1. Load OHLCV data
     data_loader = OHLCVDataLoader(timeframe="15m", lookback_candles=200)

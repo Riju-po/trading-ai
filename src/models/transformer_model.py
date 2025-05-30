@@ -147,6 +147,7 @@ class PriceTransformer:
             return tensor_data
         return None
     
+    # In the predict method, add a check before calling detach()
     def predict(self, ohlcv_data: np.ndarray) -> Dict[str, Any]:
         """Generate predictions using the transformer model.
         
