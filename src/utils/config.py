@@ -62,6 +62,11 @@ class ConfigManager:
                 "lookback_candles": 200,
                 "data_dir": "data"
             },
+            "exchange": {
+                "name": "delta",
+                "use_testnet": False,
+                "rate_limit": True
+            },
             "models": {
                 "quantum": {
                     "n_qubits": 8,
