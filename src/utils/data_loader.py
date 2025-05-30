@@ -5,11 +5,16 @@ import json
 from datetime import datetime, timedelta
 import logging
 from typing import Optional, List, Dict, Any
+import dotenv
+import os
 
 try:
     import ccxt
 except ImportError:
     logging.warning("CCXT not installed. Using simulation mode.")
+
+# Load environment variables
+dotenv.load_dotenv()
 
 class OHLCVDataLoader:
     """Data loader for OHLCV cryptocurrency data."""
@@ -35,15 +40,20 @@ class OHLCVDataLoader:
         
         # Initialize exchange connection if available
         try:
-            self.exchange = ccxt.binance({
+            # Use Delta Exchange instead of Binance
+            self.exchange = ccxt.delta({
                 'enableRateLimit': True,
-                'options': {
-                    'defaultType': 'future',  # Use futures for better data
-                }
+                'apiKey': os.getenv('DELTA_API_KEY'),
+                'secret': os.getenv('DELTA_API_SECRET')
             })
             self.simulation_mode = False
+            self.logger.info("Connected to Delta Exchange")
         except NameError:
             self.logger.warning("Running in simulation mode without exchange connection")
+            self.exchange = None
+            self.simulation_mode = True
+        except Exception as e:
+            self.logger.error(f"Error connecting to Delta Exchange: {e}")
             self.exchange = None
             self.simulation_mode = True
     
