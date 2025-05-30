@@ -144,11 +144,10 @@ class OHLCVDataLoader:
         
         return ohlcv
     
-    # In the _load_exchange_data method, add better error handling
     def _load_exchange_data(self):
         try:
             # Existing code to fetch from exchange
-            # ...
+            pass # Add pass statement to resolve IndentationError
         except Exception as e:
             logger.warning(f"Could not fetch data from exchange: {e}")
             logger.info("Using cached or simulated data instead")
