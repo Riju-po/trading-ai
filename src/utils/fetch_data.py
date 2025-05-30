@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 def main():
-    logger.info("Fetching latest OHLCV data for AI Signal Generator")
+    logger.info("Fetching latest OHLCV data from Delta Exchange for AI Signal Generator")
     
     # Initialize data loader for multiple timeframes and symbols
     timeframes = ['15m', '1h', '4h']
@@ -20,7 +20,7 @@ def main():
     
     for timeframe in timeframes:
         for symbol in symbols:
-            logger.info(f"Fetching {symbol} data for {timeframe} timeframe")
+            logger.info(f"Fetching {symbol} data for {timeframe} timeframe from Delta Exchange")
             data_loader = OHLCVDataLoader(
                 timeframe=timeframe,
                 symbol=symbol,
